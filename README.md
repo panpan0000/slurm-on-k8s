@@ -1,9 +1,9 @@
-#Purpose:
+# Purpose:
 
 Create a slurm cluster upon k8s
 
 
-#Usage:
+# Usage:
 ```
 kubectl apply -f *.yaml
 kubectl get po -w
@@ -18,7 +18,7 @@ kubectl exec -it $(kubectl get pods --selector=app=slurmmaster -o jsonpath='{.it
 NOTE: just use local path as PV for now.
 
 
-#Reference:
+# Reference:
 
 This is a kubernetes yaml translation for https://github.com/rancavil/slurm-cluster
 
