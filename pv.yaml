@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"PersistentVolume","metadata":{"annotations":{},"labels":{"type":"local"},"name":"my-pv"},"spec":{"accessModes":["ReadWriteMany"],"capacity":{"storage":"10Gi"},"hostPath":{"path":"/tmp/pv"},"storageClassName":"manual"}}
+    pv.kubernetes.io/bound-by-controller: "yes"
+  creationTimestamp: "2023-11-21T05:26:20Z"
+  finalizers:
+  - kubernetes.io/pv-protection
+  labels:
+    type: local
+  name: my-pv
+  resourceVersion: "2040684"
+  uid: 7d3cf121-5935-49cc-bf00-652a756c77d4
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 10Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: my-pvc
+    namespace: default
+    resourceVersion: "2040680"
+    uid: 6d29f24d-337a-40df-9ea9-fe6fc24216e5
+  hostPath:
+    path: /tmp/pv
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  volumeMode: Filesystem
+status:
+  phase: Bound

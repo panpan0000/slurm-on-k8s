@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: slurmmaster
+  name: slurmmaster
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP1
+    targetPort: 3306
+  - port: 6817
+    protocol: TCP2
+    targetPort: 6817
+  - port: 6818
+    protocol: TCP3
+    targetPort: 6818
+  - port: 6819
+    protocol: TCP4
+    targetPort: 6819
+  selector:
+    app: slurmmaster
+  type: ClusterIP

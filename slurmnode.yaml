@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  annotations:
+  labels:
+    app: slurmnode
+  name: slurmnode
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: slurmnode
+  template:
+    metadata:
+      labels:
+        app: slurmnode
+    spec:
+      containers:
+      - image: rancavil/slurm-node:19.05.5-1
+        env:
+        - name: SLURM_NODENAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        imagePullPolicy: IfNotPresent
+        name: slurm-node
+        resources: {}
+        volumeMounts:
+        - mountPath: /home/admin
+          name: shared-vol
+        - name: slurm-config
+          mountPath: /etc/slurm-llnl/slurm.conf
+          subPath: slurm.conf
+      volumes:
+      - name: shared-vol
+        persistentVolumeClaim:
+          claimName: my-pvc
+      - name: slurm-config
+        configMap:
+          name:  slurmconf
