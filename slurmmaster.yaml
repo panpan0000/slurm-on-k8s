@@ -37,5 +37,5 @@ spec:
           name:  slurmconf
       dnsConfig:
         searches:
-        - slurmd-headless.slurm2.svc.cluster.local
+        - slurmd-headless.YOURNAMESPACE.svc.cluster.local
       dnsPolicy: ClusterFirst
