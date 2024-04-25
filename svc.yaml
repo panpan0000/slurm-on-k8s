@@ -7,16 +7,20 @@ metadata:
 spec:
   ports:
   - port: 3306
-    protocol: TCP1
+    name: tcp-1
+    protocol: TCP
     targetPort: 3306
   - port: 6817
-    protocol: TCP2
+    name: tcp-2
+    protocol: TCP
     targetPort: 6817
   - port: 6818
-    protocol: TCP3
+    name: tcp-3
+    protocol: TCP
     targetPort: 6818
   - port: 6819
-    protocol: TCP4
+    name: tcp-4
+    protocol: TCP
     targetPort: 6819
   selector:
     app: slurmmaster

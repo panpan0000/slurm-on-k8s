@@ -157,6 +157,6 @@ kind: ConfigMap
 metadata:
   creationTimestamp: "2023-11-21T08:01:48Z"
   name: slurmconf
-  namespace: default
+  namespace: slurm-ns
   resourceVersion: "2059605"
   uid: 3356b98b-26b7-4857-b570-5411aaf4553a

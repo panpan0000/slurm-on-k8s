@@ -5,7 +5,7 @@ metadata:
   labels:
     app: slurmmaster
   name: slurmmaster
-  namespace: default
+  namespace: slurm-ns
 spec:
   replicas: 1
   selector:

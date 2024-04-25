@@ -5,7 +5,7 @@ Create a slurm cluster upon k8s
 
 # Usage:
 ```
-kubectl apply -f *.yaml
+kubectl apply -f .
 kubectl get po -w
 ```
 
