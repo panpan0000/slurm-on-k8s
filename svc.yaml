@@ -25,3 +25,21 @@ spec:
   selector:
     app: slurmmaster
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: slurmd
+  name: slurmd-headless
+spec:
+  clusterIP: None
+  ports:
+  - port: 6818
+    protocol: TCP
+    targetPort: 6818
+  selector:
+    app: slurmd
+  type: ClusterIP
+
+

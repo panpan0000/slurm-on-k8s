@@ -5,7 +5,7 @@ metadata:
   labels:
     app: slurmmaster
   name: slurmmaster
-  namespace: slurm-ns
+  
 spec:
   replicas: 1
   selector:
@@ -35,3 +35,7 @@ spec:
       - name: slurm-config
         configMap:
           name:  slurmconf
+      dnsConfig:
+        searches:
+        - slurmd-headless.slurm2.svc.cluster.local
+      dnsPolicy: ClusterFirst

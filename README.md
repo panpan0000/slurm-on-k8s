@@ -12,6 +12,11 @@ kubectl get po -w
 
 ```
 kubectl exec -it $(kubectl get pods --selector=app=slurmmaster -o jsonpath='{.items[0].metadata.name}') -- scontrol show node
+
+
+# debug error
+tail -f  /var/log/slurm-llnl/slurmctld.log
+
 ```
 
 
