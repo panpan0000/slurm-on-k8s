@@ -1,9 +1,14 @@
 # Purpose:
 
 Create a slurm cluster upon k8s
+It shows the concept to run Slurm management and worker as Pod in K8S.
+
 
 
 # Usage:
+
+1. Install the slurm on k8s cluster
+
 ```
 export NS=slurm
 kubectl create ns $NS
@@ -14,23 +19,32 @@ kubectl -n $NS get po -w
 
 
 ```
-kubectl -n $NS  exec -it $(kubectl -n $NS get pods --selector=app=slurmmaster -o jsonpath='{.items[0].metadata.name}') -- sinfo
+ctlPod="$(kubectl -n $NS get pods --selector=app=slurmmaster -o jsonpath='{.items[0].metadata.name}')"
 
-kubectl -n $NS  exec -it $(kubectl -n $NS get pods --selector=app=slurmmaster -o jsonpath='{.items[0].metadata.name}') -- scontrol show node
+# get Slurm Cluster Info
+kubectl -n $NS  exec -it $ctlPod  -- sinfo
+
+# show Slurm Node details
+kubectl -n $NS  exec -it $ctlPod  -- scontrol show node
 
 
 # debug error for slurmctld log, as needed
-kubectl -n $NS  exec -it $(kubectl -n $NS get pods --selector=app=slurmmaster -o jsonpath='{.items[0].metadata.name}') -- tail -f  /var/log/slurm-llnl/slurmctld.log
+kubectl -n $NS  exec -it $ctlPod  -- tail -f  /var/log/slurm-llnl/slurmctld.log
 
 ```
 
 
+2. Create a slurm script and run
 
 
 ```
-kubectl -n $NS  exec -it $(kubectl -n $NS  get pods --selector=app=slurmmaster -o jsonpath='{.items[0].metadata.name}') -- bash
+# Get into the slurmctld pod
+
+kubectl -n $NS  exec -it $ctlPod -- bash
 ```
+
 all below commands are running inside above pod:
+
 
 
 ```
@@ -60,6 +74,15 @@ sbatch  a.sh
 squeue
 
 ```
+
+
+
+
+
+
+
+
+
 
 NOTE: just use local path as PV for now.
 
